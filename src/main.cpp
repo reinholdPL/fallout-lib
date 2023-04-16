@@ -3,8 +3,11 @@
 
 int main()
 {
-    const char *paletteFilename = "/home/rein/Synctehing/projekty/frm2img/color.pal";
+    const char *paletteFilename = "/home/rein/Syncthing/projekty/frm2img/color.pal";
+    const char *frmFilename = "/home/rein/Syncthing/projekty/fallout/falldemo/art/intrface/skildex.frm";
+
     falloutLib::cPalette pal(paletteFilename);
+    falloutLib::cFrm frm;
 
     if (pal.getErrorState())
     {
@@ -12,7 +15,9 @@ int main()
         return 1;
     }
 
-    // /home/rein/Syncthing/projekty/fallout/falldemo/art/intrface/skildex.frm
+    frm.loadFrm(frmFilename);
+
+    // 
     // for (int i=2; i<10; i++) {
     //     falloutLib::dumpColor( pal.getColorByIndex(i) );
     // }

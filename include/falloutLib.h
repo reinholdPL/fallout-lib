@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "cPalette.h"
+#include "cFrm.h"
 
 namespace falloutLib {
     

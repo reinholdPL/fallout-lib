@@ -2,21 +2,21 @@
 #define __C_PALETTE_H
 
 #include "utils.h"
+#include "cError.h"
 
 namespace falloutLib
 {
-    class cPalette
+    class cPalette: public cError
     {
     public:
         cPalette();
         cPalette(const char *filename);
         errorResult loadPalette(const char *filename);
         cPalStr getColorByIndex(unsigned char idx);
-        errorResult getErrorState();
 
     private:
         cPalStr colors[256];
-        errorResult errorState;
+        
     };
 }
 

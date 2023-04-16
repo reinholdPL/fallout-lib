@@ -2,19 +2,14 @@
 
 namespace falloutLib
 {
-    cPalette::cPalette()
-    {
-        errorState = NO_ERROR;
-    }
-
-    cPalette::cPalette(const char *filename) : cPalette()
+    cPalette::cPalette(const char *filename)
     {
         loadPalette(filename);
     }
 
     errorResult cPalette::loadPalette(const char *filename)
     {
-        errorState = NO_ERROR;
+        setErrorState(NO_ERROR);
 
         char *palData = nullptr;
         unsigned long currentFileOffset = 0;
@@ -22,7 +17,7 @@ namespace falloutLib
 
         if (palData == nullptr)
         {
-            errorState = NO_FILE;
+            setErrorState(NO_FILE);
             return NO_FILE;
         }
 
@@ -47,8 +42,5 @@ namespace falloutLib
         return colors[idx];
     }
 
-    errorResult cPalette::getErrorState()
-    {
-        return errorState;
-    }
+
 }
