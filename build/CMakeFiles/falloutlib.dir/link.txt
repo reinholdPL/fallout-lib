@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/falloutlib.dir/src/main.cpp.o CMakeFiles/falloutlib.dir/src/utils.cpp.o CMakeFiles/falloutlib.dir/src/falloutLib.cpp.o CMakeFiles/falloutlib.dir/src/cPalette.cpp.o -o falloutlib 
