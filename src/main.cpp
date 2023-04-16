@@ -3,13 +3,12 @@
 
 int main()
 {
-    falloutLib::errorResult error = falloutLib::NO_ERROR;
-    falloutLib::cPalette pal;
+    const char *paletteFilename = "/home/rein/Synctehing/projekty/frm2img/color.pal";
+    falloutLib::cPalette pal(paletteFilename);
 
-    error = pal.loadPalette("/home/rein/Syncthing/projekty/frm2img/color.pal");
-
-    if (error)
+    if (pal.getErrorState())
     {
+        printf("%s: %s\n", paletteFilename, falloutLib::errCodeToString( pal.getErrorState() ));
         return 1;
     }
 

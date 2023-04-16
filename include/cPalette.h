@@ -9,13 +9,15 @@ namespace falloutLib
     {
     public:
         cPalette();
+        cPalette(const char *filename);
         errorResult loadPalette(const char *filename);
         cPalStr getColorByIndex(unsigned char idx);
+        errorResult getErrorState();
 
     private:
         cPalStr colors[256];
+        errorResult errorState;
     };
-
 }
 
 #endif

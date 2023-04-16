@@ -6,6 +6,10 @@
 
 namespace falloutLib
 {
+    static const char *const stringErrorValues[] = {
+        "No error",
+        "File not found"};
+
     typedef enum
     {
         NO_ERROR,
@@ -22,6 +26,8 @@ namespace falloutLib
     char *loadFileContent(const char *filename);
     unsigned char readByteFromBuffer(const char *buffer, unsigned long offset);
     void dumpColor(cPalStr col);
+    const char* errCodeToString(errorResult err);
+
 }
 
 #endif

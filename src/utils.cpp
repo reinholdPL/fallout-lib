@@ -4,9 +4,10 @@ namespace falloutLib
 {
     char *loadFileContent(const char *filename)
     {
-        char* buffer=nullptr;
-        FILE* input = fopen(filename, "rb");
-        if (input == nullptr) {
+        char *buffer = nullptr;
+        FILE *input = fopen(filename, "rb");
+        if (input == nullptr)
+        {
             return nullptr;
         }
 
@@ -21,23 +22,37 @@ namespace falloutLib
         return buffer;
     }
 
-    unsigned char readByteFromBuffer(const char* buffer, unsigned long offset) 
+    unsigned char readByteFromBuffer(const char *buffer, unsigned long offset)
     {
         return buffer[offset];
     }
 
-    unsigned short readUInt16BEFromBuffer(const char* buffer, unsigned long offset) 
+    unsigned short readUInt16BEFromBuffer(const char *buffer, unsigned long offset)
     {
         unsigned short result;
-        char *ptr = (char*)&result;
-        ptr[0] = buffer[offset+1];
+        char *ptr = (char *)&result;
+        ptr[0] = buffer[offset + 1];
         ptr[1] = buffer[offset];
+        return result;
+    }
 
+    unsigned short readUInt32BEFromBuffer(const char *buffer, unsigned long offset)
+    {
+        unsigned int result;
+        char *ptr = (char *)&result;
+        ptr[0] = buffer[offset + 1];
+        ptr[1] = buffer[offset];
+        ptr[3] = buffer[offset + 3];
+        ptr[4] = buffer[offset + 2];
         return result;
     }
 
     void dumpColor(cPalStr col)
     {
         printf("R:%u G:%u B:%u\n", col.r, col.g, col.b);
+    }
+
+    const char* errCodeToString(errorResult err) {
+        return stringErrorValues[err];
     }
 }
