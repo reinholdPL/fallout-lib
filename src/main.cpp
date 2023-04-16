@@ -16,7 +16,11 @@ int main()
     }
 
     frm.loadFrm(frmFilename);
-
+    if (frm.getErrorState())
+    {
+        printf("%s: %s\n", frmFilename, falloutLib::errCodeToString( frm.getErrorState() ));
+        return 1;
+    }
     // 
     // for (int i=2; i<10; i++) {
     //     falloutLib::dumpColor( pal.getColorByIndex(i) );

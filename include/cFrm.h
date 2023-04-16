@@ -14,6 +14,10 @@ namespace falloutLib
         errorResult loadFrm(const char *filename);
 
     private:
+        unsigned int version;
+        unsigned short fps;
+        unsigned short noOfFramesPerDirection;
+        unsigned short actionFrame;
     };
 
 }

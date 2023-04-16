@@ -13,7 +13,8 @@ namespace falloutLib
     typedef enum
     {
         NO_ERROR,
-        NO_FILE
+        NO_FILE,
+        FRM_VERSION_NOT_SUPPORTED
     } errorResult;
 
     typedef struct cPalStr
@@ -25,6 +26,8 @@ namespace falloutLib
 
     char *loadFileContent(const char *filename);
     unsigned char readByteFromBuffer(const char *buffer, unsigned long offset);
+    unsigned short readUInt16BEFromBuffer(const char *buffer, unsigned long offset);
+    unsigned short readUInt32BEFromBuffer(const char *buffer, unsigned long offset);
     void dumpColor(cPalStr col);
     const char* errCodeToString(errorResult err);
 

@@ -31,19 +31,20 @@ namespace falloutLib
     {
         unsigned short result;
         char *ptr = (char *)&result;
-        ptr[0] = buffer[offset + 1];
         ptr[1] = buffer[offset];
+        ptr[0] = buffer[offset+1];
         return result;
     }
 
     unsigned short readUInt32BEFromBuffer(const char *buffer, unsigned long offset)
     {
-        unsigned int result;
+        unsigned int result = 32;
         char *ptr = (char *)&result;
-        ptr[0] = buffer[offset + 1];
-        ptr[1] = buffer[offset];
-        ptr[3] = buffer[offset + 3];
-        ptr[4] = buffer[offset + 2];
+        ptr[3] = buffer[offset ];
+        ptr[2] = buffer[offset +1];
+        ptr[1] = buffer[offset +2];
+        ptr[0] = buffer[offset +3];
+
         return result;
     }
 
