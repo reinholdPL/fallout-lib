@@ -1,3 +1,0 @@
-/home/rein/Syncthing/git_projects/fallout-lib/build/CMakeFiles/falloutlib.dir
-/home/rein/Syncthing/git_projects/fallout-lib/build/CMakeFiles/edit_cache.dir
-/home/rein/Syncthing/git_projects/fallout-lib/build/CMakeFiles/rebuild_cache.dir
