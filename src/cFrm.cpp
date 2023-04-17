@@ -108,7 +108,7 @@ namespace falloutLib
             }
         }
 
-        printf("orientations stored = %d\n", orientationsStored);
+        //printf("orientations stored = %d\n", orientationsStored);
 
         free(frmData);
         return NO_ERROR;
