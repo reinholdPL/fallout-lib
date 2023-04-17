@@ -32,7 +32,7 @@ namespace falloutLib
         unsigned short result;
         char *ptr = (char *)&result;
         ptr[1] = buffer[offset];
-        ptr[0] = buffer[offset+1];
+        ptr[0] = buffer[offset + 1];
         return result;
     }
 
@@ -40,11 +40,10 @@ namespace falloutLib
     {
         unsigned int result = 32;
         char *ptr = (char *)&result;
-        ptr[3] = buffer[offset ];
-        ptr[2] = buffer[offset +1];
-        ptr[1] = buffer[offset +2];
-        ptr[0] = buffer[offset +3];
-
+        ptr[3] = buffer[offset];
+        ptr[2] = buffer[offset + 1];
+        ptr[1] = buffer[offset + 2];
+        ptr[0] = buffer[offset + 3];
         return result;
     }
 
@@ -53,7 +52,8 @@ namespace falloutLib
         printf("R:%u G:%u B:%u\n", col.r, col.g, col.b);
     }
 
-    const char* errCodeToString(errorResult err) {
+    const char *errCodeToString(errorResult err)
+    {
         return stringErrorValues[err];
     }
 }

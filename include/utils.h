@@ -8,7 +8,9 @@ namespace falloutLib
 {
     static const char *const stringErrorValues[] = {
         "No error",
-        "File not found"};
+        "File not found"
+        "FRM version not supported"
+    };
 
     typedef enum
     {
