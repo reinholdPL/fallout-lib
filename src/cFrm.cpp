@@ -9,8 +9,10 @@ namespace falloutLib
 
     cFrm::~cFrm()
     {
-        for (int orientation=0; orientation<6; orientation++) {
-            for (int frame=0; frame<frmFrames[orientation].size(); frame++ ) {
+        for (int orientation = 0; orientation < 6; orientation++)
+        {
+            for (int frame = 0; frame < frmFrames[orientation].size(); frame++)
+            {
                 delete frmFrames[orientation][frame];
             }
         }
@@ -110,5 +112,15 @@ namespace falloutLib
 
         free(frmData);
         return NO_ERROR;
+    }
+
+    cFrmFrame *cFrm::getFrame(unsigned int direction, unsigned int frameNum)
+    {
+        if (frmFrames[direction].size() > frameNum)
+        {
+            return frmFrames[direction][frameNum];
+        }
+
+        return nullptr;
     }
 }

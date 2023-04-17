@@ -21,6 +21,7 @@ namespace falloutLib
         cFrm(const char *filename);
         ~cFrm();
         errorResult loadFrm(const char *filename);
+        cFrmFrame * getFrame(unsigned int direction = 0, unsigned int frameNum = 0);
 
     private:
         unsigned int version;
