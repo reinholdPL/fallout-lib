@@ -64,22 +64,27 @@ namespace falloutLib
         return pixelData;
     }
 
-    char *cFrmFrame::render(cPalette palette)
+    char *cFrmFrame::render(cPalette palette, bool transparency)
     {
         char *result;
 
         if (!pixelData)
             return nullptr;
 
-
-        result = new char[width*height*3]; //memory for 24bpp image
+        unsigned int bytesPerPixel = transparency?4:3;
+        result = new char[width*height*bytesPerPixel]; //memory for 24bpp image
         for (unsigned int y=0; y<height; y++) {
             for (unsigned int x=0; x<width; x++) {
-                cPalStr color = palette.getColorByIndex(pixelData[y*width+x]);
+                unsigned int colorIdx = pixelData[y*width+x];
+                cPalStr color = palette.getColorByIndex(colorIdx);
                 
-                result[(y*width+x)*3] = color.r;
-                result[(y*width+x)*3+1] = color.g;
-                result[(y*width+x)*3+2] = color.b;
+                result[(y*width+x)*bytesPerPixel] = color.r;
+                result[(y*width+x)*bytesPerPixel+1] = color.g;
+                result[(y*width+x)*bytesPerPixel+2] = color.b;
+
+                if (bytesPerPixel == 4) {
+                    result[(y*width+x)*bytesPerPixel+3] = colorIdx==0?0:255;
+                }
             }
         }
         

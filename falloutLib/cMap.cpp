@@ -40,6 +40,8 @@ namespace falloutLib
 
         currentFileOffset = 0x00EC + 4 * (noOfGlobalVars + noOfLocalVars);
 
+        // printf("currentFileOffset = %X\n", currentFileOffset);
+
         for (unsigned int i = 0; i < 3; i++)
         {
             if (hasElevation(i))
@@ -65,6 +67,14 @@ namespace falloutLib
                 elevations[i] = newElevation;
             }
         }
+
+
+        // for (int j=0; j<70; j++) {
+        //     for (int i=0; i<100; i++) {
+        //         printf("%s", elevations[0].getRoofTile(i, j)==1?"  ": "XX");
+        //     }
+        //     printf("|\n");
+        // }
 
         free(mapData);
         return NO_ERROR;

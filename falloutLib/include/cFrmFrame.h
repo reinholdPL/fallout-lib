@@ -21,7 +21,7 @@ namespace falloutLib
         unsigned int getHeight();
         short getPixelShift(unsigned int direction);
         char *getPixelData(char *data);
-        char *render(cPalette palette);
+        char *render(cPalette palette, bool transparency = false);
 
     private:
         char *pixelData;

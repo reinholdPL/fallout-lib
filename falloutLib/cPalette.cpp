@@ -2,6 +2,10 @@
 
 namespace falloutLib
 {
+    cPalette::cPalette()
+    {
+    }
+
     cPalette::cPalette(const char *filename)
     {
         loadPalette(filename);
@@ -41,6 +45,5 @@ namespace falloutLib
     {
         return colors[idx];
     }
-
 
 }

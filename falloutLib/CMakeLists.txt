@@ -12,4 +12,5 @@ add_library(falloutLib
     cError.cpp 
     cFrmFrame.cpp
     cMap.cpp
+    cList.cpp
     )

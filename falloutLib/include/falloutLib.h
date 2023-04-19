@@ -5,6 +5,7 @@
 #include "cPalette.h"
 #include "cFrm.h"
 #include "cMap.h"
+#include <cList.h>
 
 namespace falloutLib {
     
