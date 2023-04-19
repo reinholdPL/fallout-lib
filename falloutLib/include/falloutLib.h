@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "cPalette.h"
 #include "cFrm.h"
+#include "cMap.h"
 
 namespace falloutLib {
     
