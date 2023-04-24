@@ -8,10 +8,16 @@ namespace falloutLib
 {
     static const char *const stringErrorValues[] = {
         "No error",
-        "File not found"
+        "File not found",
         "FRM version not supported"
     };
 
+    typedef struct fileContent {
+        unsigned long size;
+        char *buffer;
+
+    } fileContent;
+    
     typedef enum
     {
         NO_ERROR,
@@ -27,9 +33,10 @@ namespace falloutLib
     } cPalStr;
 
     char *loadFileContent(const char *filename);
+    fileContent loadFileContentWithSize(const char *filename);
     unsigned char readByteFromBuffer(const char *buffer, unsigned long offset);
     unsigned short readUInt16BEFromBuffer(const char *buffer, unsigned long offset);
-    unsigned short readUInt32BEFromBuffer(const char *buffer, unsigned long offset);
+    unsigned int readUInt32BEFromBuffer(const char *buffer, unsigned long offset);
     void dumpColor(cPalStr col);
     const char* errCodeToString(errorResult err);
 

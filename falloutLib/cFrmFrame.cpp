@@ -83,7 +83,7 @@ namespace falloutLib
                 result[(y*width+x)*bytesPerPixel+2] = color.b;
 
                 if (bytesPerPixel == 4) {
-                    result[(y*width+x)*bytesPerPixel+3] = colorIdx==0?0:255;
+                    result[(y*width+x)*bytesPerPixel+3] = colorIdx==0?(char)0:(char)255;
                 }
             }
         }

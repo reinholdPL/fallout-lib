@@ -6,6 +6,7 @@
 #include "cFrm.h"
 #include "cMap.h"
 #include <cList.h>
+#include <cDAT.h>
 
 namespace falloutLib {
     

@@ -30,6 +30,7 @@ namespace falloutLib
         errorResult loadMap(const char *filename);
         bool isSaveFile();
         bool hasElevation(unsigned int elev);
+        cMapElevation getElevation(unsigned int elevation);
 
     private:
         unsigned int mapVersion;

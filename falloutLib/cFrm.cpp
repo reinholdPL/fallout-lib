@@ -27,7 +27,8 @@ namespace falloutLib
     {
         char *frmData = nullptr;
         unsigned long currentFileOffset = 0;
-        frmData = loadFileContent(filename);
+        fileContent fileRes = loadFileContentWithSize (filename);
+        frmData = fileRes.buffer;
 
         if (frmData == nullptr)
         {
@@ -56,10 +57,12 @@ namespace falloutLib
             }
         }
 
+
         for (unsigned int orientation = 0; orientation < 6; orientation++)
         {
+            unsigned int tmp = readUInt32BEFromBuffer(frmData, currentFileOffset);
             offsetForFrameArea[orientation] = readUInt32BEFromBuffer(frmData, currentFileOffset);
-            // printf("area currentFileOffset = %lx\n", offsetForFrameArea[orientation]);
+            // printf("%X: area currentFileOffset = %d for orient %d %d TMP = \n",currentFileOffset, offsetForFrameArea[orientation], orientation, tmp);
             currentFileOffset += 4;
         }
 
@@ -88,6 +91,8 @@ namespace falloutLib
                 height = readUInt16BEFromBuffer(frmData, currentFileOffset + 2);
                 newFrame->setHeight(height);
 
+                // printf("orientation = %d, frame %d/%d %dx%d currentFileOffset=%ld fsize=%ld\n", orientation, frame, noOfFramesPerDirection, width, height, currentFileOffset, fileRes.size);
+
                 currentFileOffset += 4;
                 currentFileOffset += 4; // skipping frame-size
 
@@ -108,7 +113,8 @@ namespace falloutLib
             }
         }
 
-        //printf("orientations stored = %d\n", orientationsStored);
+
+
 
         free(frmData);
         return NO_ERROR;

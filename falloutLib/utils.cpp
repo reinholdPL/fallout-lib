@@ -22,6 +22,29 @@ namespace falloutLib
         return buffer;
     }
 
+    fileContent loadFileContentWithSize(const char *filename)
+    {
+        fileContent result;
+        result.buffer = nullptr;
+
+        FILE *input = fopen(filename, "rb");
+        if (input == nullptr)
+        {
+            return result;
+        }
+
+        fseek(input, 0, SEEK_END);
+        unsigned long fileSize = ftell(input);
+        result.size = fileSize;
+        result.buffer = new char[fileSize];
+        fseek(input, 0, SEEK_SET);
+
+        fread(result.buffer, fileSize, 1, input);
+        fclose(input);
+
+        return result;
+    }
+
     unsigned char readByteFromBuffer(const char *buffer, unsigned long offset)
     {
         return buffer[offset];
@@ -36,14 +59,16 @@ namespace falloutLib
         return result;
     }
 
-    unsigned short readUInt32BEFromBuffer(const char *buffer, unsigned long offset)
+    unsigned int readUInt32BEFromBuffer(const char *buffer, unsigned long offset)
     {
-        unsigned int result = 32;
+        unsigned int result;
         char *ptr = (char *)&result;
         ptr[3] = buffer[offset];
         ptr[2] = buffer[offset + 1];
         ptr[1] = buffer[offset + 2];
         ptr[0] = buffer[offset + 3];
+
+        //printf("%x %x %x %x %d \n ", ptr[0], ptr[1], ptr[2], ptr[3], result);
         return result;
     }
 

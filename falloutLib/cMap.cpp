@@ -114,4 +114,9 @@ namespace falloutLib
         return roofTiles[x][y];
     }
 
+    cMapElevation cMap::getElevation(unsigned int elevation)
+    {
+        return elevations[elevation];
+    }
+
 }

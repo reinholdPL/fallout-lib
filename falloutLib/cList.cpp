@@ -43,7 +43,7 @@ namespace falloutLib
 
     const char* cList::getEntryByNum(unsigned short num) {
         if (num-1 < entries.size())
-            return entries[num-1].c_str();
+            return entries[num].c_str();
         else return nullptr;
     }
 
