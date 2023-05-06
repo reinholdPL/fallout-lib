@@ -9,7 +9,7 @@ add_executable(frm_example frm.cpp)
 target_link_libraries(frm_example ${SDL2_LIBRARIES} ${PROJECT_NAME})
 
 add_executable(map_test map_main.cpp)
-target_link_libraries(map_test ${SDL2_LIBRARIES}  ${OpenCV_LIBRARIES} ${PROJECT_NAME})
+target_link_libraries(map_test ${SDL2_LIBRARIES} ${PNG_LIBRARIES} ${OpenCV_LIBRARIES} ${PROJECT_NAME})
 
 add_executable(frm2png frm2png.cpp)
 target_link_libraries(frm2png ${PNG_LIBRARIES} ${PROJECT_NAME})

@@ -15,23 +15,38 @@ namespace falloutLib
     sFILE *datFopen(const char *filename)
     {
         // art\critters\nmwarrrg.frm
-        unsigned char *data = nullptr;
+        sFILE *result = nullptr;
+        fileContent fileData;
+        fileData.size = -1;
+
         for (unsigned int datFile = 0; datFile < datFiles.size(); datFile++)
         {
-            data = datFiles[datFile]->getFileByName(filename);
-            if (data != nullptr)
+            fileData = datFiles[datFile]->getFileByName(filename);
+            if (fileData.size != -1)
             {
-                // printf("found file in dat file: %d\n", datFile);
+                result = new sFILE;
+                result->size = fileData.size;
+                result->buffer = (unsigned char *)fileData.buffer;
+                result->position = 0;
                 break;
             }
         }
 
-        if (data == nullptr)
+        if (fileData.size == -1)
         { // no file in dat
-            fileContent fileData = loadFileContentWithSize(filename);
+            fileData = loadFileContentWithSize(filename);
+            //printf("not in dat file %d\n", fileData.size);
+
+            if (fileData.size != -1) {
+                result = new sFILE;
+                result->size = fileData.size;
+                result->buffer = (unsigned char *)fileData.buffer;
+                result->position = 0;
+            }
         }
 
-        return nullptr;
+
+        return result;
     }
 
     cDAT::cDAT()
@@ -134,8 +149,11 @@ namespace falloutLib
         return files[filename];
     }
 
-    unsigned char *cDAT::getFileByName(std::string filename)
+    fileContent cDAT::getFileByName(std::string filename)
     {
+        fileContent file;
+        file.size = -1;
+
         std::string fname = filename;
         std::for_each(
             fname.begin(),
@@ -146,9 +164,9 @@ namespace falloutLib
             });
 
         if (input == nullptr)
-            return nullptr;
+            return file;
         if (files.count(fname) == 0)
-            return nullptr;
+            return file;
 
         unsigned char *dataBuffer = new unsigned char[files[fname].packedSize];
         fseek(input, files[fname].fileOffset, SEEK_SET);
@@ -156,7 +174,9 @@ namespace falloutLib
 
         if (files[fname].compressed == false)
         {
-            return dataBuffer;
+            file.buffer = dataBuffer;
+            file.size = files[fname].packedSize;
+            return file;
         }
 
         // printf("file is compressed!\n");
@@ -166,7 +186,9 @@ namespace falloutLib
         uncompress(uncompressedData, &destLen, dataBuffer, files[fname].packedSize);
 
         // printf("destLen = %lu, %u\n", destLen, files[fname].realSize );
-        return uncompressedData;
+        file.buffer = uncompressedData;
+        file.size = files[fname].realSize;
+        return file;
 
         // 23139
     }

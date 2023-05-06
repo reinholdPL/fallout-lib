@@ -37,7 +37,7 @@ namespace falloutLib
         cDAT(const char *filename);
         ~cDAT();
         errorResult loadDAT(const char *filename);
-        unsigned char *getFileByName(std::string filename);
+        fileContent getFileByName(std::string filename);
         cDATFile getFileDataByName(std::string filename);
 
     private:

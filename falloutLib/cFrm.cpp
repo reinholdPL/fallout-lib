@@ -1,4 +1,5 @@
 #include "cFrm.h"
+#include "cDAT.h"
 
 namespace falloutLib
 {
@@ -28,13 +29,18 @@ namespace falloutLib
         char *frmData = nullptr;
         unsigned long currentFileOffset = 0;
         fileContent fileRes = loadFileContentWithSize (filename);
-        frmData = fileRes.buffer;
+        frmData = (char*)fileRes.buffer;
 
-        if (frmData == nullptr)
+        sFILE* frmFile = datFopen(filename);
+
+        if (frmFile == nullptr)
         {
             setErrorState(NO_FILE);
             return NO_FILE;
         }
+
+        frmData = (char*)frmFile->buffer;
+        
 
         version = readUInt32BEFromBuffer(frmData, 0x0000);
         if (version != 4)

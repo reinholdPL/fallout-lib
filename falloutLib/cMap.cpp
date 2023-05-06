@@ -1,4 +1,5 @@
 #include "cMap.h"
+#include "cDAT.h"
 
 namespace falloutLib
 {
@@ -12,14 +13,17 @@ namespace falloutLib
         setErrorState(NO_ERROR);
 
         char *mapData = nullptr;
+        sFILE *fileMap = datFopen(filename);
         unsigned long currentFileOffset = 0;
-        mapData = loadFileContent(filename);
+        //mapData = loadFileContent(filename);
 
-        if (mapData == nullptr)
+        if (fileMap == nullptr)
         {
             setErrorState(NO_FILE);
             return NO_FILE;
         }
+
+        mapData = (char*)fileMap->buffer;
 
         mapVersion = readUInt32BEFromBuffer(mapData, 0);
         printf("mapVersion = %u\n", mapVersion);
@@ -107,10 +111,12 @@ namespace falloutLib
 
     unsigned short cMapElevation::getFloorTile(unsigned int x, unsigned int y)
     {
+        if (x<0 || y<0 || x>=100 || y>=100) return 1;
         return floorTiles[x][y];
     }
     unsigned short cMapElevation::getRoofTile(unsigned int x, unsigned int y)
     {
+        if (x<0 || y<0 || x>=100 || y>=100) return 1;
         return roofTiles[x][y];
     }
 

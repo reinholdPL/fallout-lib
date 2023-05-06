@@ -1,7 +1,18 @@
 #include <cList.h>
+#include <cDAT.h>
+#include <algorithm>
 
 namespace falloutLib
 {
+
+    static inline void rtrim(std::string &s)
+    {
+        s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch)
+                             { return !std::isspace(ch); })
+                    .base(),
+                s.end());
+    }
+
     cList::cList()
     {
     }
@@ -17,19 +28,25 @@ namespace falloutLib
 
         char *listData = nullptr;
         unsigned long currentFileOffset = 0;
-        listData = loadFileContent(filename);
+        sFILE *listFile = datFopen(filename);
 
-        if (listData == nullptr)
+        if (listFile == nullptr)
         {
             setErrorState(NO_FILE);
             return NO_FILE;
         }
 
+        listData = (char *)listFile->buffer;
+
         char *split_request;
         split_request = strtok(listData, "\r\n");
         while (split_request != NULL)
         {
-            entries.push_back(split_request);
+            std::string res = split_request;
+            rtrim(res);
+
+
+            entries.push_back(res.c_str());
             split_request = strtok(NULL, "\r\n");
         }
 
@@ -41,10 +58,12 @@ namespace falloutLib
         return getErrorState();
     }
 
-    const char* cList::getEntryByNum(unsigned short num) {
-        if (num-1 < entries.size())
+    const char *cList::getEntryByNum(unsigned short num)
+    {
+        if (num - 1 < entries.size())
             return entries[num].c_str();
-        else return nullptr;
+        else
+            return nullptr;
     }
 
 }

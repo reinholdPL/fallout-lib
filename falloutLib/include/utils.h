@@ -13,8 +13,8 @@ namespace falloutLib
     };
 
     typedef struct fileContent {
-        unsigned long size;
-        char *buffer;
+        long size;
+        unsigned char *buffer;
 
     } fileContent;
     

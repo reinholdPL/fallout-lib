@@ -30,13 +30,14 @@ namespace falloutLib
         FILE *input = fopen(filename, "rb");
         if (input == nullptr)
         {
+            result.size = -1;
             return result;
         }
 
         fseek(input, 0, SEEK_END);
         unsigned long fileSize = ftell(input);
         result.size = fileSize;
-        result.buffer = new char[fileSize];
+        result.buffer = new unsigned char[fileSize];
         fseek(input, 0, SEEK_SET);
 
         fread(result.buffer, fileSize, 1, input);
